@@ -1,7 +1,7 @@
 export default class Character {
   constructor(options) {
-    this._optionsNames = ['name', 'type'];
-    this._typeNames = ['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
+    this.optionsNames = ['name', 'type'];
+    this.typeNames = ['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
     this.checkOptions(options);
     this.health = 100;
     this.level = 1;
@@ -13,19 +13,16 @@ export default class Character {
     if (!Object.keys(options).length) {
       throw new Error('not found options object');
     }
-    this._optionsNames.forEach((item) => {
-      if (!options.hasOwnProperty(item)) {
+    this.optionsNames.forEach((item) => {
+      if (!Object.hasOwnProperty.call(options, item)) {
         throw new Error(`not found ${item} property`);
       }
     });
-    if (
-      typeof options.type !== 'string' ||
-      !this._typeNames.find((item) => item === options.type)
-    ) {
-      throw new Error(`options.type should be 'String' and one of ${this._typeNames}`);
+    if (typeof options.type !== 'string' || !this.typeNames.find((item) => item === options.type)) {
+      throw new Error(`options.type should be 'String' and one of ${this.typeNames}`);
     }
     if (typeof options.name !== 'string' || options.name.length < 2 || options.name.length > 10) {
-      throw new Error(`options.name should be 'String' and min 2 max 10 length`);
+      throw new Error('options.name should be "String" and min 2 max 10 length');
     }
 
     this.name = options.name;
@@ -34,7 +31,7 @@ export default class Character {
 
   levelUp() {
     if (!this.health > 0) {
-      throw new Error(`dont level up for dead Character`);
+      throw new Error('dont level up for dead Character');
     }
     this.level += 1;
     this.health = 100;
@@ -44,7 +41,7 @@ export default class Character {
 
   damage(points) {
     if (this.health <= 0) {
-      throw new Error(`Character is already dead`);
+      throw new Error('Character is already dead');
     }
     this.health -= points * (1 - this.defence / 100);
   }

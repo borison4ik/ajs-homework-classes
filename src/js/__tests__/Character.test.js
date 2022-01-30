@@ -1,4 +1,5 @@
 import Character from '../components/Character';
+import Bowman from '../components/Bowman';
 
 let char;
 
@@ -38,6 +39,15 @@ describe('Character class', () => {
   test('should to set default attack and defence', () => {
     expect(char.attack).toBe(0);
     expect(char.defence).toBe(0);
+  });
+
+  const archer = new Bowman({
+    name: 'John',
+  });
+
+  test('should to set attack and defence for sub classes =)', () => {
+    expect(archer.attack).toBe(25);
+    expect(archer.defence).toBe(25);
   });
 });
 
